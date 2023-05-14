@@ -1,0 +1,41 @@
+"product_name","category","price","probability_weigth"
+"Razor blades, 15 count","beauty_and_personal_care",31.97,20
+"Sunscreen Lotion","beauty_and_personal_care",9.99,20
+"The Lord of the Rings. 3 books","books",35,10
+"The hobbit: Illustrated Edition","books",21.49,10
+"Memory Card 256Gb","cameras",32.98,5
+"Battery Charger","cameras",23.99,2
+"Fast Charger","cell_phones",24.98,1
+"Phone Case","cell_phones",19.99,5
+"Active Noise Cancelling Headphones","electronics",44.99,1
+"Universal Remote Control","electronics",14.99,5
+"Snacks Variety","grocery",9.99,20
+"Orange Juice","grocery",1.99,20
+"Band-Aid","health",8.12,20
+"Nature Made Vitamin B12","health",5.49,20
+"Blanket for couch","home_and_garden",9.99,5
+"Watering can","home_and_garden",26.49,2
+"Bob Marley - Legend","music_and_dvd",27.97,5
+"Pink Floyd - The Dark Side of the Moon","music_and_dvd",30.32,5
+"Xylophone","musical_instruments",24.99,1
+"Digital Musical Keyboard","musical_instruments",39.67,1
+"Ink Cartridge","office_products",45.89,20
+"Paper Shredder","office_products",40.16,20
+"Wireless Mouse","personal_computers",9.59,5
+"Memory Stick","personal_computers",9.99,5
+"Premium Clumping Cat Litter","pet_supplies",20.55,20
+"Dog Treats Biscuits","pet_supplies",15.35,20
+"Antivirus Software","software",29.99,5
+"Security VPN Service","software",27.5,2
+"Tennis Balls","sports",3.28,2
+"Badminton Racket","sports",14.45,1
+"Paint Brush Set","tools_and_home",8.99,2
+"Bathroom Sink","tools_and_home",9.99,2
+"Colored Pencils","toys_and_games",6.39,10
+"Bubble Blower Maker Machine","toys_and_games",28.99,10
+"Lord of the Rings Motion Picture Trilogy, The (Extended Edition)","video_dvds_and_blue_ray",41.5,10
+"The Hobbit Trilogy and The Lord Of The Rings Trilogy, 6-Film Theatrical Versions","video_dvds_and_blue_ray",32.96,10
+"The Last of US. Part II","video_games",14.99,10
+"Horizon Zero Dawn. Complete Edition","video_games",12.99,10
+"Digital Sport Watch","watches",49.99,1
+"Watch For Men","watches",38.88,1

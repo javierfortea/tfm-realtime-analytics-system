@@ -1,0 +1,16 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+avro = "1.11.1"
+confluent-kafka = "2.0.2"
+fastavro = "1.7.3"
+requests = "2.27.1"
+urllib3 = "1.26.8"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"
