@@ -1,5 +1,6 @@
 import csv
 import logging
+import math
 import uuid
 from copy import deepcopy
 from datetime import datetime, timedelta
@@ -202,7 +203,7 @@ def create_order(current_ts):
             associated_item_name = ASSOCIATED_ITEMS[new_item["product_name"]]
 
             additional_item = item_lookup_by_name(associated_item_name)
-            new_item = create_new_order_line(order_uuid, additional_item)
+            new_item = create_new_order_line(order_uuid, deepcopy(additional_item))
             order_lines.append(new_item)
             order_total += new_item["total"]
 
@@ -260,7 +261,7 @@ if __name__ == "__main__":
             current_ts = current_ts.replace(hour=hour)
             logger.info(f"Generating data for hour: {current_ts.strftime('%Y-%m-%d %H:00')}")
 
-            orders_n = orders_n * pow(1 + (DAILY_INCREASE_PERCENTAGE / 100), day_n)
+            orders_n = math.floor(orders_n * pow(1 + (DAILY_INCREASE_PERCENTAGE / 100), day_n))
 
             for _ in range(orders_n):
 
