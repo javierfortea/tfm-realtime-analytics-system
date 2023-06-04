@@ -20,6 +20,8 @@ DISCOUNT_PERCENTAGE = 5
 MAX_ORDER_ITEMS = 5
 MAX_ITEM_AMOUNT = 3
 
+DAILY_INCREASE_PERCENTAGE = 3
+
 START_DATE = datetime(2023, 4, 1)
 END_DATE = datetime(2023, 4, 30)
 
@@ -204,12 +206,15 @@ if __name__ == "__main__":
     producer = Producer(producer_config)
 
     current_ts = START_DATE
+    day_n = 0
     while current_ts <= END_DATE:
         logger.info(f"Generating data for date: {current_ts.strftime('%Y-%m-%d')}")
 
         for hour, orders_n in DAILY_SLOTS_WEIGHTS_MAP.items():
             current_ts = current_ts.replace(hour=hour)
             logger.info(f"Generating data for hour: {current_ts.strftime('%Y-%m-%d %H:00')}")
+
+            orders_n = orders_n * pow(1 + (DAILY_INCREASE_PERCENTAGE / 100), day_n)
 
             for _ in range(orders_n):
 
@@ -223,5 +228,6 @@ if __name__ == "__main__":
                     publish_serialized_event_to_kafka(ORDER_LINES_KAFKA_TOPIC_NAME, order_line)
 
         current_ts = current_ts + timedelta(days=1)
+        day_n += 1
 
     producer.flush()
