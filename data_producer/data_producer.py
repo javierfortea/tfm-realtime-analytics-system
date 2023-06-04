@@ -109,7 +109,28 @@ def choose_random_order_item():
             return item
 
 
-def choose_random_invoice_status():
+def choose_invoice_status(order):
+    if order["with_discount"]:
+        return "PAID"
+
+    if order["is_new_user"]:
+        rand = randint(0, 10)
+        if rand <= 2:
+            return "FAILED"
+        elif rand <= 8:
+            return "PENDING"
+        else:
+            return "PAID"
+
+    if order["total"] <= 100:
+        return "PAID"
+
+    if order["country_code"] in ["PT", "ES"]:
+        return "PAID"
+
+    if order["country_code"] in ["BE", "LU", "NL"]:
+        return "PENDING"
+
     result = randint(0, INVOICE_STATUSES_TOTAL_PROBABILITY_WEIGHTS)
 
     sum_prob = 0
@@ -179,7 +200,7 @@ def create_order(current_ts):
         "order_uuid": order_uuid,
         "timestamp": str(current_ts),
         "total": order_total,
-        "status": choose_random_invoice_status(),
+        "status": choose_invoice_status(order),
     }
 
     return order, order_lines, invoice
