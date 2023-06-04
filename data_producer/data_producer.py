@@ -75,6 +75,14 @@ DAILY_SLOTS_WEIGHTS_MAP = {
     23: 1,
 }
 
+ASSOCIATED_ITEMS = {
+    "Premium Clumping Cat Litter": "Dog Treats Biscuits",
+    "Snacks Variety": "Orange Juice",
+    "The Lord of the Rings. 3 books": "The hobbit: Illustrated Edition",
+    "Tennis Balls": "Badminton Racket",
+    "Paint Brush Set": "Colored Pencils"
+}
+
 
 def read_items_csv():
     items = []
@@ -160,6 +168,24 @@ def is_new_user_decissor():
     return rand <= 3
 
 
+def create_new_order_line(order_uuid, new_item):
+    new_item["order_uuid"] = order_uuid
+    new_item["timestamp"] = str(current_ts)
+    new_item["order_line_uuid"] = str(uuid.uuid4())
+
+    new_item["amount"] = randint(1, MAX_ITEM_AMOUNT)
+    new_item["total"] = new_item["amount"] * new_item["price"]
+    del (new_item["probability_weigth"])
+
+    return new_item
+
+
+def item_lookup_by_name(item_name):
+    for item in ITEMS_COLLECTION:
+        if item["product_name"] == item_name:
+            return item
+
+
 def create_order(current_ts):
     num_items = randint(1, MAX_ORDER_ITEMS)
 
@@ -168,18 +194,17 @@ def create_order(current_ts):
     order_total = 0
     order_lines = []
     for i in range(num_items):
-        new_item = deepcopy(choose_random_order_item())
-
-        new_item["order_uuid"] = order_uuid
-        new_item["timestamp"] = str(current_ts)
-        new_item["order_line_uuid"] = str(uuid.uuid4())
-
-        new_item["amount"] = randint(1, MAX_ITEM_AMOUNT)
-        new_item["total"] = new_item["amount"] * new_item["price"]
-        del (new_item["probability_weigth"])
-
+        new_item = create_new_order_line(order_uuid, deepcopy(choose_random_order_item()))
         order_lines.append(new_item)
         order_total += new_item["total"]
+
+        if new_item["product_name"] in ASSOCIATED_ITEMS.keys():
+            associated_item_name = ASSOCIATED_ITEMS[new_item["product_name"]]
+
+            additional_item = item_lookup_by_name(associated_item_name)
+            new_item = create_new_order_line(order_uuid, additional_item)
+            order_lines.append(new_item)
+            order_total += new_item["total"]
 
     apply_discount = apply_discount_decissor()
     if apply_discount:
